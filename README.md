@@ -1,5 +1,7 @@
 # Adaptive Modular Scale
 
+[![npm version](https://badge.fury.io/js/adaptive-modular-scale.svg)](https://www.npmjs.com/package/adaptive-modular-scale)
+
 A small javascript helper to get an adaptive modular scale font-size css string. This package is inspired by this little [tool](https://codepen.io/tol-is/pen/mQVLPY) by Florian Schulz.
 
 ```bash
