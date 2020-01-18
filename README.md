@@ -76,7 +76,8 @@ const theme = {
   }
 };
 
-// If you added the modular scale values to the ThemeProvider you dont have to pass it down every time
+// If you added the modular scale values to the ThemeProvider
+// you dont have to pass it down every time
 const Headline = styled.h1`
   ${ams(5)}
 `;
