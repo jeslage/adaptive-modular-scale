@@ -87,3 +87,39 @@ const App = () => (
   </ThemeProvider>
 );
 ```
+
+## Options
+
+### `step`
+
+`number` | required
+
+The step on the modular scale
+
+### `config`
+
+`object` | required
+
+### `config.base`
+
+`number[]` | required
+
+Array of minimum and maximum base size of modular scale.
+
+### `config.ratio`
+
+`number[]` | required
+
+Array of minimum and maximum ratio of modular scale.
+
+### `config.width`
+
+`number[]` | required
+
+Array of two screen widths in px. Between these values the modular scale will adapt based on screen width.
+
+### `config.numberOfBreakpoints`
+
+`number` | required
+
+Number of breakpoints which will be rendered to the css string.
