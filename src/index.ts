@@ -3,7 +3,7 @@ export interface Theme {
     base: number[];
     ratio: number[];
     width: number[];
-    numberOfBreakpoints: number;
+    breakpoints: number;
   };
   [key: string]: any;
 }
@@ -17,7 +17,7 @@ export interface Config {
   base: number[];
   ratio: number[];
   width: number[];
-  numberOfBreakpoints: number;
+  breakpoints: number;
 }
 
 const calculateSize = (
@@ -55,20 +55,20 @@ export const px2rem = (px: number): string => `${px / 16}rem`;
 /**
  * Returns adaptive modular scale css font-size string
  * @param  {number} step - Step of the modular scale
- * @param  {object} config - Config object with base, ratio, width and numberOfBreakpoints key
- * @example adaptiveModularScale(3, { base: [14, 16], ratio: [1.4, 1.67], width: [320, 960], numberOfBreakpoints: 10 })
+ * @param  {object} config - Config object with base, ratio, width and breakpoints key
+ * @example adaptiveModularScale(3, { base: [14, 16], ratio: [1.4, 1.67], width: [320, 960], breakpoints: 10 })
  * @returns {string} Resulting adaptive modular scale css font-size string
  */
 export const adaptiveModularScale = (step: number, config: Config) => (
   props: FunctionProps
 ): string => {
   const { adaptiveModularScale: ams } = props.theme;
-  const { width, base, ratio, numberOfBreakpoints } = ams || config;
+  const { width, base, ratio, breakpoints } = ams || config;
 
   const minSize = modularScale(step, base[0], ratio[0]);
   const maxSize = modularScale(step, base[1], ratio[1]);
 
-  const steps = (width[1] - width[0]) / numberOfBreakpoints;
+  const steps = (width[1] - width[0]) / breakpoints;
   let breakpointsString = ``;
 
   for (let i = width[0] + steps; i <= width[1]; i += steps) {

@@ -19,7 +19,7 @@ const Headline = styled.h1`
     base: [14, 16],
     ratio: [1.2, 1.78],
     width: [320, 960],
-    numberOfBreakpoints: 8
+    breakpoints: 8
   })}
 `;
 ```
@@ -72,7 +72,7 @@ const theme = {
     base: [14, 16],
     ratio: [1.2, 1.78],
     width: [320, 960],
-    numberOfBreakpoints: 8
+    breakpoints: 8
   }
 };
 
@@ -119,7 +119,7 @@ Array of minimum and maximum ratio of modular scale.
 
 Array of two screen widths in px. Between these values the modular scale will adapt based on screen width.
 
-### `config.numberOfBreakpoints`
+### `config.breakpoints`
 
 `number` | required
 
