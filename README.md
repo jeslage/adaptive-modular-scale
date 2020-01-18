@@ -130,3 +130,19 @@ Array of two screen widths in px. Between these values the modular scale will in
 `number` | required
 
 Number of breakpoints between the two given screen widths which will be rendered to the css string.
+
+## Additional methods
+
+`adaptive-modular-scale` also exports a default modular scale method.
+
+```js
+import styled from 'styled-components';
+import { modularScale } from 'adaptive-modular-scale';
+
+const base = 16;
+const ratio = 1.6;
+
+const Headline = styled.h1`
+  font-size: ${modularScale(5, base, ratio)}px;
+`;
+```
