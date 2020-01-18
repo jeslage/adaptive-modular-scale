@@ -1,15 +1,11 @@
-export const calculateFontSize = (
+export const calculateSize = (
   width: number,
-  scaleFrom: number,
-  scaleUntil: number,
-  minFontSize: number,
-  maxFontSize: number
+  from: number,
+  to: number,
+  min: number,
+  max: number
 ): number => {
-  return Math.round(
-    minFontSize +
-      (maxFontSize - minFontSize) *
-        ((width - scaleFrom) / (scaleUntil - scaleFrom))
-  );
+  return Math.round(min + (max - min) * ((width - from) / (to - from)));
 };
 
 /**
@@ -17,6 +13,7 @@ export const calculateFontSize = (
  * @param  {number} steps - Step of the modular scale
  * @param  {number} base - Base size of the modular scale
  * @param  {number} ratio - Ratio of the modular scale
+ * @example modularScale(3, 16, 1.67)
  * @returns {number} Resulting modular scale value
  */
 export const modularScale = (

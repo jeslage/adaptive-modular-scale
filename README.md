@@ -19,12 +19,13 @@ const Headline = styled.h1`
     base: [14, 16],
     ratio: [1.2, 1.78],
     width: [320, 960],
-    numberOfBreakpoints: 8
+    numberOfBreakpoints: 8,
+    px2rem: false
   })}
 `;
 ```
 
-will return the following font-size css
+The above example will return the following css.
 
 ```css
 .sc-bZQynM {
