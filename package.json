@@ -1,6 +1,6 @@
 {
   "name": "adaptive-modular-scale",
-  "version": "1.0.0",
+  "version": "1.0.0-rc.1",
   "description": "Little javascript helper to get adaptive modular scale font sizes",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -50,8 +50,8 @@
     "rimraf": "^3.0.0",
     "typescript": "^3.7.4"
   },
-  "repository": "jeslage/storybook-addon-theme-playground",
-  "bugs": "https://github.com/jeslage/storybook-addon-theme-playground/issues",
+  "repository": "jeslage/adaptive-modular-scale",
+  "bugs": "https://github.com/jeslage/adaptive-modular-scale/issues",
   "keywords": [
     "adaptive",
     "modular",
