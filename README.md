@@ -10,7 +10,7 @@ yarn add adaptive-modular-scale
 npm install adaptive-modular-scale
 ```
 
-## Example
+## Usage
 
 ```js
 import styled from 'styled-components';
@@ -22,7 +22,7 @@ const Headline = styled.h1`
     base: [14, 16],
     // Minimum and maximum ratio
     ratio: [1.2, 1.78],
-    // Two widths to interpolate between
+    // Two screen widths to interpolate between
     width: [320, 960],
     // Number of breakpoints between two widths
     breakpoints: 8
@@ -63,7 +63,7 @@ The above example will return the following css.
 }
 ```
 
-## ThemeProvider Example
+## ThemeProvider
 
 You can also add an `adaptiveModularScale` key to the theme object of your ThemeProvider.
 
@@ -123,10 +123,10 @@ Array of minimum and maximum ratio of modular scale.
 
 `number[]` | required
 
-Array of two screen widths in px. Between these values the modular scale will adapt based on screen width.
+Array of two screen widths in px. Between these values the modular scale will interpolate based on screen width.
 
 ### `config.breakpoints`
 
 `number` | required
 
-Number of breakpoints which will be rendered to the css string.
+Number of breakpoints between the two given screen widths which will be rendered to the css string.
