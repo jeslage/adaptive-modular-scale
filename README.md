@@ -19,8 +19,7 @@ const Headline = styled.h1`
     base: [14, 16],
     ratio: [1.2, 1.78],
     width: [320, 960],
-    numberOfBreakpoints: 8,
-    px2rem: false
+    numberOfBreakpoints: 8
   })}
 `;
 ```
