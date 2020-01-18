@@ -27,7 +27,7 @@ const adaptiveModularScale = (
   const steps = (scaleUntil - scaleFrom) / breakpoints;
   let breakpointsString = ``;
 
-  for (let i = scaleFrom; i <= scaleUntil; i += steps) {
+  for (let i = scaleFrom + steps; i <= scaleUntil; i += steps) {
     const size = calculateFontSize(
       i,
       scaleFrom,
@@ -45,10 +45,6 @@ const adaptiveModularScale = (
     font-size: ${px2rem(minFontSize)};
 
     ${breakpointsString}
-
-    @media (min-width: ${px2rem(scaleUntil)}) {
-      font-size: ${px2rem(maxFontSize)};
-    }
 `;
 };
 
