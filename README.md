@@ -19,7 +19,7 @@ const ratio = [1.2, 1.78];
 const width = [320, 960];
 const numberOfBreakpoints = 8;
 
-const StyledHeadline = styled.h1`
+const Headline = styled.h1`
   ${adaptiveModularScale(3, base, ratio, width, numberOfBreakpoints)}
 `;
 ```
@@ -55,6 +55,37 @@ will return the following font-size css
     font-size: 4.9375rem;
   }
 }
+```
+
+## ThemeProvider Example
+
+You can also add an `adaptiveModularScale` key to the theme object of a ThemeProvider.
+
+**Example**
+
+```js
+import styled, { ThemeProvider } from 'styled-components';
+import adaptiveModularScale from 'adaptive-modular-scale';
+
+const theme = {
+  adaptiveModularScale: {
+    base: [14, 16],
+    ratio: [1.2, 1.78],
+    width: [320, 960],
+    numberOfBreakpoints: 8
+  }
+};
+
+// If you added the modular scale values to the ThemeProvider you dont have to pass it down every time
+const Headline = styled.h1`
+  ${adaptiveModularScale(5)}
+`;
+
+const App = () => (
+  <ThemeProvider theme={theme}>
+    <Headline>A adaptive modular scaled headline</Headline>
+  </ThemeProvider>
+);
 ```
 
 Inspired by https://codepen.io/tol-is/pen/mQVLPY
