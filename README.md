@@ -12,10 +12,10 @@ npm install adaptive-modular-scale
 
 ```js
 import styled from 'styled-components';
-import adaptiveModularScale from 'adaptive-modular-scale';
+import ams from 'adaptive-modular-scale';
 
 const Headline = styled.h1`
-  ${adaptiveModularScale(3, {
+  ${ams(3, {
     base: [14, 16],
     ratio: [1.2, 1.78],
     width: [320, 960],
@@ -66,7 +66,7 @@ You can also add an `adaptiveModularScale` key to the theme object of your Theme
 
 ```js
 import styled, { ThemeProvider } from 'styled-components';
-import adaptiveModularScale from 'adaptive-modular-scale';
+import ams from 'adaptive-modular-scale';
 
 const theme = {
   adaptiveModularScale: {
@@ -79,7 +79,7 @@ const theme = {
 
 // If you added the modular scale values to the ThemeProvider you dont have to pass it down every time
 const Headline = styled.h1`
-  ${adaptiveModularScale(5)}
+  ${ams(5)}
 `;
 
 const App = () => (

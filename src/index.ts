@@ -1,5 +1,3 @@
-import { modularScale, calculateSize, px2rem } from './helper';
-
 export interface Theme {
   adaptiveModularScale: {
     base: number[];
@@ -22,6 +20,38 @@ export interface Config {
   numberOfBreakpoints: number;
 }
 
+const calculateSize = (
+  width: number,
+  from: number,
+  to: number,
+  min: number,
+  max: number
+): number => {
+  return Math.round(min + (max - min) * ((width - from) / (to - from)));
+};
+
+/**
+ * Returns modular scale value
+ * @param  {number} steps - Step of the modular scale
+ * @param  {number} base - Base size of the modular scale
+ * @param  {number} ratio - Ratio of the modular scale
+ * @example modularScale(3, 16, 1.67)
+ * @returns {number} Resulting modular scale value
+ */
+export const modularScale = (
+  steps: number,
+  base: number,
+  ratio: number
+): number => Math.round(base * ratio ** steps);
+
+/**
+ * Transform px value to rem value.
+ * @param {number} px - PX value as a integer. e.g. 12
+ * @returns {string} - PX value in REM
+ * @example ${px2rem(25)}
+ */
+export const px2rem = (px: number): string => `${px / 16}rem`;
+
 /**
  * Returns adaptive modular scale css font-size string
  * @param  {number} step - Step of the modular scale
@@ -29,7 +59,7 @@ export interface Config {
  * @example adaptiveModularScale(3, { base: [14, 16], ratio: [1.4, 1.67], width: [320, 960], numberOfBreakpoints: 10 })
  * @returns {string} Resulting adaptive modular scale css font-size string
  */
-const adaptiveModularScale = (step: number, config: Config) => (
+export const adaptiveModularScale = (step: number, config: Config) => (
   props: FunctionProps
 ): string => {
   const { width, base, ratio, numberOfBreakpoints } =
@@ -54,4 +84,3 @@ const adaptiveModularScale = (step: number, config: Config) => (
 };
 
 export default adaptiveModularScale;
-export { modularScale, adaptiveModularScale };
