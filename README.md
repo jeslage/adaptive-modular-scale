@@ -8,7 +8,7 @@ yarn add adaptive-modular-scale
 npm install adaptive-modular-scale
 ```
 
-## Usage
+## Example / Usage
 
 ```js
 import styled from 'styled-components';
@@ -24,15 +24,12 @@ const StyledHeadline = styled.h1`
 `;
 ```
 
-will return
+will return the following font-size css
 
 ```css
 .sc-bZQynM {
   font-size: 2.9375rem;
 
-  @media (min-width: 20rem) {
-    font-size: 2.9375rem;
-  }
   @media (min-width: 25rem) {
     font-size: 3.1875rem;
   }
