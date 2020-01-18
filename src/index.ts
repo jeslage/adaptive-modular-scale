@@ -15,28 +15,29 @@ export interface FunctionProps {
   [key: string]: any;
 }
 
+export interface Config {
+  base: number[];
+  ratio: number[];
+  width: number[];
+  numberOfBreakpoints: number;
+}
+
 /**
  * Returns adaptive modular scale css font-size string
  * @param  {number} step - Step of the modular scale
- * @param  {array} base - Base sizes of the modular scale
- * @param  {array} ratio - ratio of the modular scale
- * @param  {number} width - Boundaries where the modular scale should scale
- * @param  {number} numberOfBreakpoints - Number of breakpoints between width
- * @example adaptiveModularScale(3, [14, 16], [1.4, 1.67], [320, 960], 10)
+ * @param  {object} config - Config object with base, ratio, width and numberOfBreakpoints key
+ * @example adaptiveModularScale(3, { base: [14, 16], ratio: [1.4, 1.67], width: [320, 960], numberOfBreakpoints: 10 })
  * @returns {string} Resulting adaptive modular scale css font-size string
  */
-const adaptiveModularScale = (
-  step: number,
-  base: number[],
-  ratio: number[],
-  width: number[],
-  numberOfBreakpoints: number
-) => (props: FunctionProps): string => {
-  const { adaptiveModularScale: ams } = props.theme;
-  const [scaleFrom, scaleUntil] = ams.width || width;
-  const [minBase, maxBase] = ams.base || base;
-  const [minRatio, maxRatio] = ams.ratio || ratio;
-  const breakpoints = ams.numberOfBreakpoints || numberOfBreakpoints;
+const adaptiveModularScale = (step: number, config: Config) => (
+  props: FunctionProps
+): string => {
+  const { adaptiveModularScale } = props.theme;
+  const [scaleFrom, scaleUntil] = adaptiveModularScale.width || config.width;
+  const [minBase, maxBase] = adaptiveModularScale.base || config.base;
+  const [minRatio, maxRatio] = adaptiveModularScale.ratio || config.ratio;
+  const breakpoints =
+    adaptiveModularScale.numberOfBreakpoints || config.numberOfBreakpoints;
 
   const minFontSize = modularScale(step, minBase, minRatio);
   const maxFontSize = modularScale(step, maxBase, maxRatio);
@@ -58,10 +59,7 @@ const adaptiveModularScale = (
     )}) { font-size: ${px2rem(size)}; }`;
   }
 
-  return `
-    font-size: ${px2rem(minFontSize)};
-    ${breakpointsString}
-`;
+  return `font-size: ${px2rem(minFontSize)};${breakpointsString}`;
 };
 
 export default adaptiveModularScale;

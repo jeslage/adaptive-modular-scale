@@ -1,7 +1,7 @@
 {
   "name": "adaptive-modular-scale",
   "version": "1.0.0",
-  "description": ".",
+  "description": "⚖️ Little javascript helper to get adaptive modular scale font sizes",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -11,10 +11,10 @@
     "build:watch": "npm run clean && tsc -p . -w",
     "build": "npm run clean && tsc -p .",
     "clean": "rimraf dist",
-    "lint": "eslint ./src --ext ts --ext tsx",
+    "lint": "eslint ./src --ext ts",
     "prepublish": "yarn prettier-write && yarn lint && yarn type-check",
     "prepare": "npm run build",
-    "prettier-write": "prettier --write \"src/**/*.tsx\"",
+    "prettier-write": "prettier --write \"src/**/*.ts\"",
     "test": "echo \"No test specified\"",
     "type-check": "tsc --pretty --noEmit"
   },
@@ -39,7 +39,6 @@
   },
   "devDependencies": {
     "@types/node": "^13.1.1",
-    "@types/react": "16.9.17",
     "@typescript-eslint/eslint-plugin": "^2.13.0",
     "@typescript-eslint/parser": "^2.13.0",
     "eslint": "^6.8.0",

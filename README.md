@@ -14,13 +14,13 @@ npm install adaptive-modular-scale
 import styled from 'styled-components';
 import adaptiveModularScale from 'adaptive-modular-scale';
 
-const base = [14, 16];
-const ratio = [1.2, 1.78];
-const width = [320, 960];
-const numberOfBreakpoints = 8;
-
 const Headline = styled.h1`
-  ${adaptiveModularScale(3, base, ratio, width, numberOfBreakpoints)}
+  ${adaptiveModularScale(3, {
+    base: [14, 16],
+    ratio: [1.2, 1.78],
+    width: [320, 960],
+    numberOfBreakpoints: 8
+  })}
 `;
 ```
 
@@ -83,7 +83,7 @@ const Headline = styled.h1`
 
 const App = () => (
   <ThemeProvider theme={theme}>
-    <Headline>A adaptive modular scaled headline</Headline>
+    <Headline>An adaptive modular scale sized headline</Headline>
   </ThemeProvider>
 );
 ```
