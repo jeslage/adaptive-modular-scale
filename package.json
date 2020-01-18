@@ -1,0 +1,61 @@
+{
+  "name": "adaptive-modular-scale",
+  "version": "1.0.0",
+  "description": ".",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build:watch": "npm run clean && tsc -p . -w",
+    "build": "npm run clean && tsc -p .",
+    "clean": "rimraf dist",
+    "lint": "eslint ./src --ext ts --ext tsx",
+    "prepublish": "yarn prettier-write && yarn lint && yarn type-check",
+    "prepare": "npm run build",
+    "prettier-write": "prettier --write \"src/**/*.tsx\"",
+    "test": "echo \"No test specified\"",
+    "type-check": "tsc --pretty --noEmit"
+  },
+  "author": "Johannes Eslage",
+  "license": "MIT",
+  "prettier": {
+    "printWidth": 80,
+    "singleQuote": true
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn run type-check"
+    }
+  },
+  "lint-staged": {
+    "*.@(ts|tsx)": [
+      "yarn lint",
+      "yarn prettier-write",
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^13.1.1",
+    "@types/react": "16.9.17",
+    "@typescript-eslint/eslint-plugin": "^2.13.0",
+    "@typescript-eslint/parser": "^2.13.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-import": "^2.19.1",
+    "husky": "^3.1.0",
+    "lint-staged": "^9.5.0",
+    "prettier": "^1.19.1",
+    "rimraf": "^3.0.0",
+    "typescript": "^3.7.4"
+  },
+  "repository": "jeslage/storybook-addon-theme-playground",
+  "bugs": "https://github.com/jeslage/storybook-addon-theme-playground/issues",
+  "keywords": [
+    "adaptive",
+    "modular",
+    "scale"
+  ]
+}
