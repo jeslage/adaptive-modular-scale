@@ -4,7 +4,7 @@ export const calculateFontSize = (
   scaleUntil: number,
   minFontSize: number,
   maxFontSize: number
-) => {
+): number => {
   return Math.round(
     minFontSize +
       (maxFontSize - minFontSize) *
@@ -19,9 +19,11 @@ export const calculateFontSize = (
  * @param  {number} ratio - Ratio of the modular scale
  * @returns {number} Resulting modular scale value
  */
-export const modularScale = (steps: number, base: number, ratio: number) => {
-  return Math.round(base * ratio ** steps);
-};
+export const modularScale = (
+  steps: number,
+  base: number,
+  ratio: number
+): number => Math.round(base * ratio ** steps);
 
 /**
  * Transform px value to rem value.
@@ -29,6 +31,6 @@ export const modularScale = (steps: number, base: number, ratio: number) => {
  * @returns {string} - PX value in REM
  * @example ${px2rem(25)}
  */
-export const px2rem = (px: number) => {
+export const px2rem = (px: number): string => {
   return `${px / 16}rem`;
 };

@@ -1,11 +1,16 @@
 import { modularScale, calculateFontSize, px2rem } from './helper';
 
-interface Theme {
-  scale: { base: number[]; ratio: number[]; width: number[] };
+export interface Theme {
+  adaptiveModularScale: {
+    base: number[];
+    ratio: number[];
+    width: number[];
+    numberOfBreakpoints: number;
+  };
   [key: string]: any;
 }
 
-interface PropsInterface {
+export interface FunctionProps {
   theme: Theme;
   [key: string]: any;
 }
@@ -26,15 +31,17 @@ const adaptiveModularScale = (
   ratio: number[],
   width: number[],
   numberOfBreakpoints: number
-) => ({ theme }): PropsInterface => {
-  const [scaleFrom, scaleUntil] = theme.scale.width || width;
-  const [minBase, maxBase] = theme.scale.base || base;
-  const [minRatio, maxRatio] = theme.scale.ratio || ratio;
+) => (props: FunctionProps): string => {
+  const { adaptiveModularScale: ams } = props.theme;
+  const [scaleFrom, scaleUntil] = ams.width || width;
+  const [minBase, maxBase] = ams.base || base;
+  const [minRatio, maxRatio] = ams.ratio || ratio;
+  const breakpoints = ams.numberOfBreakpoints || numberOfBreakpoints;
 
   const minFontSize = modularScale(step, minBase, minRatio);
   const maxFontSize = modularScale(step, maxBase, maxRatio);
 
-  const steps = (scaleUntil - scaleFrom) / numberOfBreakpoints;
+  const steps = (scaleUntil - scaleFrom) / breakpoints;
   let breakpointsString = ``;
 
   for (let i = scaleFrom + steps; i <= scaleUntil; i += steps) {
@@ -53,7 +60,6 @@ const adaptiveModularScale = (
 
   return `
     font-size: ${px2rem(minFontSize)};
-
     ${breakpointsString}
 `;
 };
