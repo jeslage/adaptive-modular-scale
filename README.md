@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/adaptive-modular-scale.svg)](https://www.npmjs.com/package/adaptive-modular-scale)
 
-A small javascript helper to get an adaptive modular scale font-size css string. This package is inspired by this little [tool](https://codepen.io/tol-is/pen/mQVLPY) by Florian Schulz.
+A small javascript helper to get an adaptive modular scale font-size css string. It will interpolate between two modular scales and breakpoints and will return you sizes based on the given modular scales. This package is inspired by this [tool](https://codepen.io/tol-is/pen/mQVLPY) by Florian Schulz.
 
 ```bash
 yarn add adaptive-modular-scale
@@ -18,9 +18,13 @@ import ams from 'adaptive-modular-scale';
 
 const Headline = styled.h1`
   ${ams(3, {
+    // Minimum and maximum base
     base: [14, 16],
+    // Minimum and maximum ratio
     ratio: [1.2, 1.78],
+    // Two widths to interpolate between
     width: [320, 960],
+    // Number of breakpoints between two widths
     breakpoints: 8
   })}
 `;
