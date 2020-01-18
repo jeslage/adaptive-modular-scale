@@ -1,6 +1,6 @@
-# Adaptive Modular Scale Helper
+# Adaptive Modular Scale
 
-A small javascript helper for an adaptive modular scale font-size css string.
+A small javascript helper to get an adaptive modular scale font-size css string. This package is inspired by this little [tool](https://codepen.io/tol-is/pen/mQVLPY) by Florian Schulz.
 
 ```bash
 yarn add adaptive-modular-scale
@@ -8,7 +8,7 @@ yarn add adaptive-modular-scale
 npm install adaptive-modular-scale
 ```
 
-## Example / Usage
+## Example
 
 ```js
 import styled from 'styled-components';
@@ -59,7 +59,7 @@ will return the following font-size css
 
 ## ThemeProvider Example
 
-You can also add an `adaptiveModularScale` key to the theme object of a ThemeProvider.
+You can also add an `adaptiveModularScale` key to the theme object of your ThemeProvider.
 
 **Example**
 
@@ -87,5 +87,3 @@ const App = () => (
   </ThemeProvider>
 );
 ```
-
-Inspired by https://codepen.io/tol-is/pen/mQVLPY
