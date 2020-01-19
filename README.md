@@ -131,6 +131,12 @@ Array of two screen widths in px. Between these values the modular scale will in
 
 Number of breakpoints between the two given screen widths which will be rendered to the css string.
 
+### `config.property`
+
+`string` | optional | default: "font-size"
+
+Add optional css property if you want to use adaptive modular scale for another property than font-size.
+
 ## Additional methods
 
 `adaptive-modular-scale` also exports a default modular scale method.

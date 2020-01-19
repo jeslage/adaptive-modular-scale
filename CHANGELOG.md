@@ -7,9 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Property key to config object
+
 ## [1.0.1] - 2020-01-19
 
-## Updated
+### Updated
 
 - Moved to math.pow for modular scale calculation due to wrong calculations
 - Rounded resulting values with toFixed(3)
