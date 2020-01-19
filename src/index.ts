@@ -27,7 +27,7 @@ const calculateSize = (
   min: number,
   max: number
 ): number => {
-  return Math.round(min + (max - min) * ((width - from) / (to - from)));
+  return min + (max - min) * ((width - from) / (to - from));
 };
 
 /**
@@ -42,7 +42,7 @@ export const modularScale = (
   steps: number,
   base: number,
   ratio: number
-): number => Math.round(base * ratio ** steps);
+): number => base * Math.pow(ratio, steps);
 
 /**
  * Transform px value to rem value.
@@ -50,7 +50,7 @@ export const modularScale = (
  * @returns {string} - PX value in REM
  * @example ${px2rem(25)}
  */
-export const px2rem = (px: number): string => `${px / 16}rem`;
+export const px2rem = (px: number): string => `${(px / 16).toFixed(3)}rem`;
 
 /**
  * Returns adaptive modular scale css font-size string
@@ -68,7 +68,8 @@ export const adaptiveModularScale = (step: number, config: Config) => (
   const minSize = modularScale(step, base[0], ratio[0]);
   const maxSize = modularScale(step, base[1], ratio[1]);
 
-  const steps = (width[1] - width[0]) / breakpoints;
+  const numberOfBreakpoints = breakpoints || 8;
+  const steps = (width[1] - width[0]) / numberOfBreakpoints;
   let breakpointsString = ``;
 
   for (let i = width[0] + steps; i <= width[1]; i += steps) {
