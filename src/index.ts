@@ -18,6 +18,7 @@ export interface Config {
   ratio: number[];
   width: number[];
   breakpoints: number;
+  property?: string;
 }
 
 const calculateSize = (
@@ -65,6 +66,9 @@ export const adaptiveModularScale = (step: number, config: Config) => (
   const { adaptiveModularScale: ams } = props.theme;
   const { width, base, ratio, breakpoints } = ams || config;
 
+  const customProperty =
+    config && config.property ? config.property : 'font-size';
+
   const minSize = modularScale(step, base[0], ratio[0]);
   const maxSize = modularScale(step, base[1], ratio[1]);
 
@@ -78,10 +82,10 @@ export const adaptiveModularScale = (step: number, config: Config) => (
     const mediaQuery = px2rem(i);
     const fontSize = px2rem(size);
 
-    breakpointsString += `@media (min-width: ${mediaQuery}) { font-size: ${fontSize}; }`;
+    breakpointsString += `@media (min-width: ${mediaQuery}) { ${customProperty}: ${fontSize}; }`;
   }
 
-  return `font-size: ${px2rem(minSize)};${breakpointsString}`;
+  return `${customProperty}: ${px2rem(minSize)};${breakpointsString}`;
 };
 
 export default adaptiveModularScale;
