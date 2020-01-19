@@ -95,6 +95,21 @@ const App = () => (
 );
 ```
 
+## Custom css property
+
+By default `adaptive-modular-scale` uses `font-size` as the css property. But you can also change the property by adding a property key to your config object.
+
+**Example**
+
+```js
+import styled, { ThemeProvider } from 'styled-components';
+import ams from 'adaptive-modular-scale';
+
+const Headline = styled.h1`
+  ${ams(5, { property: 'margin-bottom' })}
+`;
+```
+
 ## Options
 
 ### `step`

@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Property key to config object
+- Added property key to config object
 
 ## [1.0.1] - 2020-01-19
 
