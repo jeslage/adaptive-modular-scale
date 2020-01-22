@@ -14,10 +14,10 @@ npm install adaptive-modular-scale
 
 ```js
 import styled from 'styled-components';
-import ams from 'adaptive-modular-scale';
+import adaptiveModularScale from 'adaptive-modular-scale';
 
 const Headline = styled.h1`
-  ${ams(3, {
+  ${adaptiveModularScale(3, {
     // Minimum and maximum base
     base: [14, 16],
     // Minimum and maximum ratio
@@ -77,7 +77,7 @@ You can also add an `adaptiveModularScale` key to the theme object of your Theme
 
 ```js
 import styled, { ThemeProvider } from 'styled-components';
-import ams from 'adaptive-modular-scale';
+import adaptiveModularScale from 'adaptive-modular-scale';
 
 const theme = {
   adaptiveModularScale: {
@@ -91,7 +91,7 @@ const theme = {
 // If you added the modular scale values to the ThemeProvider
 // you dont have to pass it down every time
 const Headline = styled.h1`
-  ${ams(5)}
+  ${adaptiveModularScale(5)}
 `;
 
 const App = () => (
@@ -109,10 +109,10 @@ By default `adaptive-modular-scale` uses `font-size` as the css property. But yo
 
 ```js
 import styled, { ThemeProvider } from 'styled-components';
-import ams from 'adaptive-modular-scale';
+import adaptiveModularScale from 'adaptive-modular-scale';
 
 const Headline = styled.h1`
-  ${ams(5, { property: 'margin-bottom' })}
+  ${adaptiveModularScale(5, { property: 'margin-bottom' })}
 `;
 ```
 
