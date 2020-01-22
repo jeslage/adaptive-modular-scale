@@ -59,18 +59,19 @@ export const adaptiveModularScale = (step: number, config: Config) => (
   props: FunctionProps
 ): string => {
   const { adaptiveModularScale } = props.theme;
-  const { width, base, ratio, breakpoints, corrections } = adaptiveModularScale || config;
+  const { width, base, ratio, breakpoints, corrections, property } =
+    adaptiveModularScale || config;
 
-  const customProperty = config && config.property ? config.property : 'font-size';
+  const cssProp = property || 'font-size';
 
   const [minCorrection, maxCorrection] =
     corrections && corrections[step] ? corrections[step] : [0, 0];
-
   const minSize = modularScale(step, base[0], ratio[0]) + minCorrection;
   const maxSize = modularScale(step, base[1], ratio[1]) + maxCorrection;
 
   const numberOfBreakpoints = breakpoints || 8;
   const steps = (width[1] - width[0]) / numberOfBreakpoints;
+
   let breakpointsString = ``;
 
   for (let i = width[0] + steps; i <= width[1]; i += steps) {
@@ -79,10 +80,10 @@ export const adaptiveModularScale = (step: number, config: Config) => (
     const mediaQuery = px2rem(i);
     const fontSize = px2rem(size);
 
-    breakpointsString += `@media (min-width: ${mediaQuery}) { ${customProperty}: ${fontSize}; }`;
+    breakpointsString += `@media (min-width: ${mediaQuery}) { ${cssProp}: ${fontSize}; }`;
   }
 
-  return `${customProperty}: ${px2rem(minSize)};${breakpointsString}`;
+  return `${cssProp}: ${px2rem(minSize)};${breakpointsString}`;
 };
 
 export default adaptiveModularScale;
