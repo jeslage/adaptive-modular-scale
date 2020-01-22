@@ -25,7 +25,13 @@ const Headline = styled.h1`
     // Two screen widths to interpolate between
     width: [320, 960],
     // Number of breakpoints between two widths
-    breakpoints: 8
+    breakpoints: 8,
+    // Optional corrections for steps
+    corrections: {
+      // Correct minimal and maximum size for step. The below example
+      // will correct the minimal step by -1px and the maximum step by +2px
+      0: [-1, 2]
+    }
   })}
 `;
 ```
@@ -95,6 +101,21 @@ const App = () => (
 );
 ```
 
+## Custom css property
+
+By default `adaptive-modular-scale` uses `font-size` as the css property. But you can also change the property by adding a property key to your config object.
+
+**Example**
+
+```js
+import styled, { ThemeProvider } from 'styled-components';
+import ams from 'adaptive-modular-scale';
+
+const Headline = styled.h1`
+  ${ams(5, { property: 'margin-bottom' })}
+`;
+```
+
 ## Options
 
 ### `step`
@@ -123,13 +144,33 @@ Array of minimum and maximum ratio of modular scale.
 
 `number[]` | required
 
-Array of two screen widths in px. Between these values the modular scale will interpolate based on screen width.
+Array of two screen widths in px. Between these values the modular scale will interpolate between both scales based on screen width.
 
 ### `config.breakpoints`
 
 `number` | required
 
 Number of breakpoints between the two given screen widths which will be rendered to the css string.
+
+### `config.corrections`
+
+`{ [step]: number[] }` | optional
+
+Add optional corrections object with steps as keys.
+
+```js
+const corrections = {
+  // This will correct the minimal size of step "0" by -2px
+  // and the maximum size by +1px
+  0: [-2, 1]
+};
+```
+
+### `config.property`
+
+`string` | optional | default: "font-size"
+
+Add optional css property if you want to use adaptive modular scale for another property than font-size.
 
 ## Additional methods
 

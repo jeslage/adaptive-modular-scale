@@ -7,9 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2020-01-22
+
+### Added
+
+- Added corrections object to config
+- Added property key to config
+
 ## [1.0.1] - 2020-01-19
 
-## Updated
+### Updated
 
 - Moved to math.pow for modular scale calculation due to wrong calculations
 - Rounded resulting values with toFixed(3)
@@ -24,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release
 
-[unreleased]: https://github.com/jeslage/adaptive-modular-scale/compare/v1.0.1...develop
+[unreleased]: https://github.com/jeslage/adaptive-modular-scale/compare/v1.1.0...develop
+[1.1.0]: https://github.com/jeslage/adaptive-modular-scale/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/jeslage/adaptive-modular-scale/compare/v1.0.0-rc.1...v1.0.1
 [1.0.0-rc.1]: https://github.com/jeslage/adaptive-modular-scale/compare/v1.0.0...v1.0.0-rc.1
