@@ -1,10 +1,5 @@
 export interface Theme {
-  adaptiveModularScale: {
-    base: number[];
-    ratio: number[];
-    width: number[];
-    breakpoints: number;
-  };
+  adaptiveModularScale: Config;
   [key: string]: any;
 }
 
@@ -18,6 +13,9 @@ export interface Config {
   ratio: number[];
   width: number[];
   breakpoints: number;
+  corrections?: {
+    [key: string]: number[];
+  };
   property?: string;
 }
 
@@ -39,11 +37,8 @@ const calculateSize = (
  * @example modularScale(3, 16, 1.67)
  * @returns {number} Resulting modular scale value
  */
-export const modularScale = (
-  steps: number,
-  base: number,
-  ratio: number
-): number => base * Math.pow(ratio, steps);
+export const modularScale = (steps: number, base: number, ratio: number): number =>
+  base * Math.pow(ratio, steps);
 
 /**
  * Transform px value to rem value.
@@ -63,14 +58,16 @@ export const px2rem = (px: number): string => `${(px / 16).toFixed(3)}rem`;
 export const adaptiveModularScale = (step: number, config: Config) => (
   props: FunctionProps
 ): string => {
-  const { adaptiveModularScale: ams } = props.theme;
-  const { width, base, ratio, breakpoints } = ams || config;
+  const { adaptiveModularScale } = props.theme;
+  const { width, base, ratio, breakpoints, corrections } = adaptiveModularScale || config;
 
-  const customProperty =
-    config && config.property ? config.property : 'font-size';
+  const customProperty = config && config.property ? config.property : 'font-size';
 
-  const minSize = modularScale(step, base[0], ratio[0]);
-  const maxSize = modularScale(step, base[1], ratio[1]);
+  const [minCorrection, maxCorrection] =
+    corrections && corrections[step] ? corrections[step] : [0, 0];
+
+  const minSize = modularScale(step, base[0], ratio[0]) + minCorrection;
+  const maxSize = modularScale(step, base[1], ratio[1]) + maxCorrection;
 
   const numberOfBreakpoints = breakpoints || 8;
   const steps = (width[1] - width[0]) / numberOfBreakpoints;
