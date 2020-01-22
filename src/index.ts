@@ -59,10 +59,9 @@ export const adaptiveModularScale = (step: number, config: Config) => (
   props: FunctionProps
 ): string => {
   const { adaptiveModularScale } = props.theme;
-  const { width, base, ratio, breakpoints, corrections, property } =
-    adaptiveModularScale || config;
+  const { width, base, ratio, breakpoints, corrections } = adaptiveModularScale || config;
 
-  const cssProp = property || 'font-size';
+  const cssProp = config && config.property ? config.property : 'font-size';
 
   const [minCorrection, maxCorrection] =
     corrections && corrections[step] ? corrections[step] : [0, 0];
