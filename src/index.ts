@@ -9,17 +9,20 @@ export interface FunctionProps {
 }
 
 export interface Config {
-  base: number[];
-  ratio: number[];
-  width: number[];
-  breakpoints: number;
+  base: [number, number];
+  ratio: [number, number];
+  width: [number, number];
+  breakpoints?: number;
   corrections?: {
-    [key: string]: number[];
+    [key: string]: [number, number];
+  };
+  lineHeights?: {
+    [key: string]: [number, number];
   };
   property?: string;
 }
 
-const calculateSize = (
+const calcSize = (
   width: number,
   from: number,
   to: number,
@@ -55,18 +58,23 @@ export const px2rem = (px: number): string => `${(px / 16).toFixed(3)}rem`;
  * @example adaptiveModularScale(3, { base: [14, 16], ratio: [1.4, 1.67], width: [320, 960], breakpoints: 10 })
  * @returns {string} Resulting adaptive modular scale css font-size string
  */
-export const adaptiveModularScale = (step: number, config: Config) => (
-  props: FunctionProps
+export const adaptiveModularScale = (step: number, config?: Config) => (
+  props?: FunctionProps
 ): string => {
-  const { adaptiveModularScale } = props.theme;
-  const { width, base, ratio, breakpoints, corrections } = adaptiveModularScale || config;
+  const settings = props?.theme?.adaptiveModularScale || config;
+
+  if (typeof settings === 'undefined') {
+    throw Error('No config or theme object with adaptiveModularScale key provided.');
+  }
+
+  const { width, base, ratio, breakpoints, corrections, lineHeights } = settings;
 
   const cssProp = config && config.property ? config.property : 'font-size';
 
-  const [minCorrection, maxCorrection] =
-    corrections && corrections[step] ? corrections[step] : [0, 0];
-  const minSize = modularScale(step, base[0], ratio[0]) + minCorrection;
-  const maxSize = modularScale(step, base[1], ratio[1]) + maxCorrection;
+  const lineHeight = lineHeights && lineHeights[step] ? lineHeights[step] : undefined;
+  const correction = corrections && corrections[step] ? corrections[step] : [0, 0];
+  const minSize = modularScale(step, base[0], ratio[0]) + correction[0];
+  const maxSize = modularScale(step, base[1], ratio[1]) + correction[1];
 
   const numberOfBreakpoints = breakpoints || 8;
   const steps = (width[1] - width[0]) / numberOfBreakpoints;
@@ -74,15 +82,21 @@ export const adaptiveModularScale = (step: number, config: Config) => (
   let breakpointsString = ``;
 
   for (let i = width[0] + steps; i <= width[1]; i += steps) {
-    const size = calculateSize(i, width[0], width[1], minSize, maxSize);
+    const size = calcSize(i, width[0], width[1], minSize, maxSize);
+
+    const lh = lineHeight
+      ? `line-height: ${calcSize(i, width[0], width[1], lineHeight[0], lineHeight[1])};`
+      : '';
 
     const mediaQuery = px2rem(i);
     const fontSize = px2rem(size);
 
-    breakpointsString += `@media (min-width: ${mediaQuery}) { ${cssProp}: ${fontSize}; }`;
+    breakpointsString += `@media (min-width: ${mediaQuery}) { ${cssProp}: ${fontSize}; ${lh} }`;
   }
 
-  return `${cssProp}: ${px2rem(minSize)};${breakpointsString}`;
+  return `${cssProp}: ${px2rem(minSize)}; ${
+    lineHeight ? `line-height: ${lineHeight[0]};` : ''
+  } ${breakpointsString}`;
 };
 
 export default adaptiveModularScale;
