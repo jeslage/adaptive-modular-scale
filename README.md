@@ -1,6 +1,8 @@
 # Adaptive Modular Scale
 
 [![npm version](https://badge.fury.io/js/adaptive-modular-scale.svg)](https://www.npmjs.com/package/adaptive-modular-scale)
+[![Codecov Coverage](https://img.shields.io/codecov/c/github/jeslage/adaptive-modular-scale.svg?style=shield)](https://codecov.io/gh/jeslage/adaptive-modular-scale/)
+[![CircleCI](https://circleci.com/gh/jeslage/adaptive-modular-scale.svg?style=shield)](https://circleci.com/gh/jeslage/adaptive-modular-scale)
 
 A small javascript helper to get an adaptive modular scale font-size css string. It will interpolate between two modular scales and breakpoints and will return you sizes based on the given modular scales. This package is inspired by this [tool](https://codepen.io/tol-is/pen/mQVLPY) by Florian Schulz.
 
@@ -25,12 +27,16 @@ const Headline = styled.h1`
     // Two screen widths to interpolate between
     width: [320, 960],
     // Number of breakpoints between two widths
-    breakpoints: 8,
+    breakpoints?: 8,
     // Optional corrections for steps
-    corrections: {
+    corrections?: {
       // Correct minimal and maximum size for step. The below example
       // will correct the minimal step by -1px and the maximum step by +2px
-      0: [-1, 2]
+      3: [-1, 2]
+    },
+    lineHeights?: {
+      // Add minimal and maximum lineHeights for step.
+      3: [1.2, 1.5]
     }
   })}
 `;
@@ -40,31 +46,40 @@ The above example will return the following css.
 
 ```css
 .sc-bZQynM {
-  font-size: 2.9375rem;
+  font-size: 1.45rem;
+  line-height: 1.2;
 
   @media (min-width: 25rem) {
-    font-size: 3.1875rem;
+    font-size: 1.989rem;
+    line-height: 1.2375;
   }
   @media (min-width: 30rem) {
-    font-size: 3.4375rem;
+    font-size: 2.528rem;
+    line-height: 1.275;
   }
   @media (min-width: 35rem) {
-    font-size: 3.6875rem;
+    font-size: 3.068rem;
+    line-height: 1.3125;
   }
   @media (min-width: 40rem) {
-    font-size: 3.9375rem;
+    font-size: 3.607rem;
+    line-height: 1.35;
   }
   @media (min-width: 45rem) {
-    font-size: 4.1875rem;
+    font-size: 4.147rem;
+    line-height: 1.3875;
   }
   @media (min-width: 50rem) {
-    font-size: 4.4375rem;
+    font-size: 4.686rem;
+    line-height: 1.425;
   }
   @media (min-width: 55rem) {
-    font-size: 4.6875rem;
+    font-size: 5.225rem;
+    line-height: 1.4625;
   }
   @media (min-width: 60rem) {
-    font-size: 4.9375rem;
+    font-size: 5.765rem;
+    line-height: 1.5;
   }
 }
 ```
@@ -130,19 +145,19 @@ The step on the modular scale
 
 ### `config.base`
 
-`number[]` | required
+`[number, number]` | required
 
 Array of minimum and maximum base size of modular scale.
 
 ### `config.ratio`
 
-`number[]` | required
+`[number, number]` | required
 
 Array of minimum and maximum ratio of modular scale.
 
 ### `config.width`
 
-`number[]` | required
+`[number, number]` | required
 
 Array of two screen widths in px. Between these values the modular scale will interpolate between both scales based on screen width.
 
@@ -154,9 +169,9 @@ Number of breakpoints between the two given screen widths which will be rendered
 
 ### `config.corrections`
 
-`{ [step]: number[] }` | optional
+`{ [step]: [number, number] }` | optional
 
-Add optional corrections object with steps as keys.
+Add optional corrections array with steps as keys.
 
 ```js
 const corrections = {
@@ -165,6 +180,12 @@ const corrections = {
   0: [-2, 1]
 };
 ```
+
+### `config.lineHeights`
+
+`{ [step]: [number, number] }` | optional
+
+Add optional lineHeights array with steps as keys.
 
 ### `config.property`
 
