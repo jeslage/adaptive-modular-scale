@@ -73,13 +73,13 @@ export const adaptiveModularScale = (step: number, config?: Config) => (
 
   const lineHeight = lineHeights && lineHeights[step] ? lineHeights[step] : undefined;
   const correction = corrections && corrections[step] ? corrections[step] : [0, 0];
+
   const minSize = modularScale(step, base[0], ratio[0]) + correction[0];
   const maxSize = modularScale(step, base[1], ratio[1]) + correction[1];
 
-  const numberOfBreakpoints = breakpoints || 8;
-  const steps = (width[1] - width[0]) / numberOfBreakpoints;
+  const steps = (width[1] - width[0]) / (breakpoints || 8);
 
-  let breakpointsString = ``;
+  let mediaQueries = ``;
 
   for (let i = width[0] + steps; i <= width[1]; i += steps) {
     const size = calcSize(i, width[0], width[1], minSize, maxSize);
@@ -88,15 +88,15 @@ export const adaptiveModularScale = (step: number, config?: Config) => (
       ? `line-height: ${calcSize(i, width[0], width[1], lineHeight[0], lineHeight[1])};`
       : '';
 
-    const mediaQuery = px2rem(i);
+    const mq = px2rem(i);
     const fontSize = px2rem(size);
 
-    breakpointsString += `@media (min-width: ${mediaQuery}) { ${cssProp}: ${fontSize}; ${lh} }`;
+    mediaQueries += `@media (min-width: ${mq}) { ${cssProp}: ${fontSize}; ${lh} }`;
   }
 
   return `${cssProp}: ${px2rem(minSize)}; ${
     lineHeight ? `line-height: ${lineHeight[0]};` : ''
-  } ${breakpointsString}`;
+  } ${mediaQueries}`;
 };
 
 export default adaptiveModularScale;
